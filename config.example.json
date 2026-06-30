@@ -1,0 +1,5 @@
+{
+  "_comment": "範本檔。請複製本檔為 config.local.json 並填入你自己的 Notion Glossary 資料庫指標。config.local.json 已被 .gitignore 排除，不會上傳。",
+  "glossaryDataSource": "collection://<YOUR_GLOSSARY_DATA_SOURCE_ID>",
+  "glossaryPage": "https://app.notion.com/p/<YOUR_GLOSSARY_PAGE_ID>"
+}
