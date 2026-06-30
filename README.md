@@ -58,16 +58,23 @@ The glossary (Step 2) is just a plain **Notion database** you create and point t
 | `主題` Topic | Groups rows by talk type — used to load only what's relevant. / 依場次類型分組，只載相關列 | `airway` |
 | `備註` Note · `確認日期` Confirmed date | Optional context & when it was verified. / 選填的補充與確認日期 | — |
 
-**How it's used at runtime / 實際怎麼運用：**
+**How you actually use it / 實際上你怎麼操作**
 
-- **On load (Step 2)** — the skill detects the talk's topic (e.g. `airway`), then pulls **only that topic's rows** as the reference baseline. You don't load the whole bank, just the slice this talk needs.
-  **載入時（Step 2）** —— skill 判斷本場主題（如 `airway`），只撈**該主題的列**當對照基準；不是整庫全載，只取這場需要的子集。
+In practice you don't fiddle with the glossary during a job — you just hand Claude the transcript and it does the lookup for you. In plain terms:
 
-- **On write-back (after the session)** — newly confirmed `misheard → correct` pairings are appended as new rows. If the correct term already exists, the new alias is just **merged into that row's `誤判片段`** instead of duplicating it.
-  **寫回時（校稿後）** —— 新確認的「誤判→正解」追加為新列；若正解已存在，新別名只是**併進該列的 `誤判片段`**，不另開重複列。
+實際整理稿子時，你不用手動去碰詞庫 —— 你只要把逐字稿丟給 Claude，它會自己去查。白話講就是：
 
-- **New topic?** Just type a new slug (e.g. `icu`, `cardio`) into the `主題` column — no new file, no schema change needed.
-  **新主題？** 直接在 `主題` 欄填新 slug（如 `icu`、`cardio`）即可，免建新檔、免改結構。
+- **It picks the right topic by itself.** Claude reads the transcript, works out what kind of talk it is (asthma / airway? infection control?), and loads *only that topic's* terms — not the whole bank. You don't have to do anything.
+  **它會自動選對主題。** Claude 看過稿子，判斷這是哪一類場次（氣喘／呼吸道？感染管制？），**只載那個主題的詞**、不是整庫全載。你什麼都不用做。
+
+- **But you can also just tell it which topic to use.** If you'd rather be explicit, or Claude guesses wrong, say something like *"this one is the `icu` topic"* and it'll switch to that slice. The topic is yours to specify anytime.
+  **但你也可以直接指定主題。** 想講明白、或 Claude 猜錯時，跟它說一句「**這份用 `icu` 主題**」，它就改用那個子集。主題隨時由你說了算。
+
+- **Adding a new topic is just naming it.** There's no setup, no new file. The first time you have a talk in a fresh area, just say so — or type a new label like `cardio` into the database's `主題` column. From that moment the topic exists and starts collecting its own terms.
+  **新增主題，就只是「替它取個名字」而已。** 完全免設定、免建檔。第一次遇到新領域的場次，講一聲就好 —— 或自己在資料庫的 `主題` 欄打個新標籤（如 `cardio`）。從這一刻起這個主題就誕生了，開始累積屬於它的詞。
+
+- **After each job it writes back what it learned.** New "misheard → correct" pairs go into the glossary automatically, filed under the right topic. (If the correct term is already there, the new mis-hearing is just added to its existing row — no duplicates.) That's why the next transcript on the same topic is always easier.
+  **每整理完一份，它會把學到的寫回去。** 新的「誤判→正解」自動存進詞庫、歸到對的主題。（如果正解早就有了，就只是把新的誤判補進那一列 —— 不會重複。）這就是為什麼同主題的下一份稿總是越來越好整理。
 
 ---
 
