@@ -46,6 +46,29 @@ A six-step workflow / 六步流程：
 
 ---
 
+## A glossary that grows itself / 會自己成長的詞庫
+
+This is what sets transcript-fix apart: **the term bank is a living, self-growing asset, fully under your control.**
+
+這是 transcript-fix 最關鍵的特點：**詞庫是一份活的、會自己成長的資產，且完全由你掌控。**
+
+- **Yours to configure / 自由設定** — the glossary lives in *your own* Notion database. Add, edit, or reorganize terms freely; the skill reads it live, so changes take effect on the very next run.
+  詞庫存在**你自己的** Notion 資料庫，可自由新增／修改／重整。skill 是即時讀取，改完下一次就生效。
+
+- **Self-recording / 自動記錄** — every time the skill resolves a confusing mis-hearing (misheard fragment → correct term), it writes that pairing **back into the glossary automatically**. Nothing has to be re-learned twice.
+  每次 skill 解開一個容易混淆的誤判（誤判片段→正解），都會把這組對應**自動寫回詞庫**。同一個坑不必踩第二次。
+
+- **Compounding over time / 會複利** — so every transcript makes the next one easier. Recurring drug names, trial names, and biomarkers accumulate, and **any future session reads the latest version live** — no re-downloading, no re-packaging.
+  於是每整理一份稿，下一份就更輕鬆。會重複出現的藥名、試驗名、生物標記不斷累積，**任何之後的對話都即時讀到最新版** —— 免下載、免重打包。
+
+- **Disciplined growth / 受控成長** — terms are topic-scoped (airway, ipc, biogend…) so only what this talk needs gets loaded; and only *cross-session* terms are kept. One-off personal names and case details are never stored — a quality rule and a growth valve at once.
+  詞庫依主題分類（airway、ipc、biogend…），只載當場需要的；且**只收會跨場重複的詞**。單場的人名、病例細節一律不入庫 —— 既是品質規則，也是控制成長的閥門。
+
+> The more you use it, the smarter it gets — and the term bank is shared across every conversation that connects to your Notion.
+> 用得越多它越聰明 —— 而且這份詞庫被所有連到你 Notion 的對話共享。
+
+---
+
 ## Hard rules / 硬規則（紅線）
 
 1. **Never fill in unconfirmable specifics** — names, institutions, drug/trial names, numbers, doses, years, lab values. If a transcript can't confirm it, mark `〔？〕`; never guess from what merely *sounds* similar.
