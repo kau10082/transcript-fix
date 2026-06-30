@@ -44,6 +44,31 @@ A six-step workflow / 六步流程：
 | 5 | **Literature verification** of named trials/data points. *Optional, needs PubMed/literature tool.* | **文獻查證**具名試驗／數據點。*可選，需 PubMed／文獻工具。* |
 | → | **Two outputs:** a reconstructed transcript (`.docx`) + a "to-confirm" list (`.docx`). | **兩份產出：** 重建版逐字稿（`.docx`）＋待確認清單（`.docx`）。 |
 
+### Setting up & using the glossary / 詞庫的設定與運用
+
+The glossary (Step 2) is just a plain **Notion database** you create and point the skill at via `config.local.json`. Each row is one correct term plus the ways it tends to get misheard:
+
+詞庫（Step 2）就是一個**你自己建立的 Notion 資料庫**，透過 `config.local.json` 指給 skill 用。每一列＝一個正解，加上它常被聽錯的樣子：
+
+| Column / 欄位 | What it holds / 內容 | Example / 範例 |
+|---|---|---|
+| `正確術語` Correct term *(title)* | The right term — the anchor. / 正確的詞（錨點） | `benralizumab` |
+| `誤判片段` Misheard fragments | All the mis-hearings, multiple split by `/`. / 各種誤判，多個用 `/` 分隔 | `法西瑪 / 班瑞莉` |
+| `類別` Category | `drug` / `bio` / `trial` / `framework` / `pathogen` / `metric` / `intervention` / `company`… | `drug` |
+| `主題` Topic | Groups rows by talk type — used to load only what's relevant. / 依場次類型分組，只載相關列 | `airway` |
+| `備註` Note · `確認日期` Confirmed date | Optional context & when it was verified. / 選填的補充與確認日期 | — |
+
+**How it's used at runtime / 實際怎麼運用：**
+
+- **On load (Step 2)** — the skill detects the talk's topic (e.g. `airway`), then pulls **only that topic's rows** as the reference baseline. You don't load the whole bank, just the slice this talk needs.
+  **載入時（Step 2）** —— skill 判斷本場主題（如 `airway`），只撈**該主題的列**當對照基準；不是整庫全載，只取這場需要的子集。
+
+- **On write-back (after the session)** — newly confirmed `misheard → correct` pairings are appended as new rows. If the correct term already exists, the new alias is just **merged into that row's `誤判片段`** instead of duplicating it.
+  **寫回時（校稿後）** —— 新確認的「誤判→正解」追加為新列；若正解已存在，新別名只是**併進該列的 `誤判片段`**，不另開重複列。
+
+- **New topic?** Just type a new slug (e.g. `icu`, `cardio`) into the `主題` column — no new file, no schema change needed.
+  **新主題？** 直接在 `主題` 欄填新 slug（如 `icu`、`cardio`）即可，免建新檔、免改結構。
+
 ---
 
 ## A glossary that grows itself / 會自己成長的詞庫
